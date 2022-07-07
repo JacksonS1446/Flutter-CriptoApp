@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, depend_on_referenced_packages, use_key_in_widget_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:graficos_integracao/configs/app_settings.dart';
 import 'package:graficos_integracao/pages/moedas_detalhes_page.dart';
 import 'package:graficos_integracao/repositories/favoritas_repository.dart';
 import 'package:graficos_integracao/repositories/moeda_repository.dart';
@@ -17,16 +18,42 @@ class MoedasPage extends StatefulWidget {
 class _MoedasPageState extends State<MoedasPage> {
   final tabela = MoedaRepository.tabela;
 
-  NumberFormat real = NumberFormat.currency(locale: 'pt-BR', name: 'R\$');
+  late NumberFormat real;
+  late Map<String, String> loc;
 
   List<Moeda> selecionadas = [];
   late FavoritasRepository favoritas;
 
+  readNumberFormat() {
+    loc = context.watch<AppSettings>().locale;
+    real = NumberFormat.currency(locale: loc['locale'], name: loc['name']);
+  }
+
+  changeLanguageButton() {
+    final locale = loc['locale'] == 'pt_BR' ? 'en_US' : 'pt_BR';
+    final name = loc['locale'] == 'pt_BR' ? '\$' : 'R\$';
+
+    return PopupMenuButton(
+      icon: Icon(Icons.language),
+      itemBuilder: (context) => [
+        PopupMenuItem(
+            child: ListTile(
+          leading: Icon(Icons.swap_vert),
+          title: Text('Usar $locale'),
+          onTap: () {
+            context.read<AppSettings>().setLocale(locale, name);
+            Navigator.pop(context);
+          },
+        ))
+      ],
+    );
+  }
+
   appBarDinamica() {
     if (selecionadas.isEmpty) {
-      return AppBar(
-        title: Center(child: Text('Cripto Moedas')),
-      );
+      return AppBar(title: Center(child: Text('Cripto Moedas')), actions: [
+        changeLanguageButton(),
+      ]);
     } else {
       return AppBar(
           leading: IconButton(
@@ -75,6 +102,7 @@ class _MoedasPageState extends State<MoedasPage> {
   @override
   Widget build(BuildContext context) {
     favoritas = Provider.of<FavoritasRepository>(context);
+    readNumberFormat();
 
     return Scaffold(
       appBar: appBarDinamica(),

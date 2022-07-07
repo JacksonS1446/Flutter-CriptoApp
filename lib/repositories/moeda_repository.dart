@@ -3,6 +3,12 @@ import '../models/moeda.dart';
 class MoedaRepository {
   static List<Moeda> tabela = [
     Moeda(
+      icone: 'images/jackcoin.jpg',
+      nome: 'JackCoin',
+      sigla: 'JKC',
+      preco: 918237.93,
+    ),
+    Moeda(
         icone: 'images/bitcoin.png',
         nome: 'Bitcoin',
         sigla: 'BTC',
@@ -13,26 +19,22 @@ class MoedaRepository {
         sigla: 'ETH',
         preco: 9716.00),
     Moeda(
-        icone: 'images/xrp.png', 
-        nome: 'XRP', 
-        sigla: 'XRP', 
-        preco: 3.34),
+      icone: 'images/litecoin.png',
+      nome: 'Litecoin',
+      sigla: 'LTC',
+      preco: 669.93,
+    ),
     Moeda(
         icone: 'images/cardano.png',
         nome: 'Cardano',
         sigla: 'ADA',
         preco: 6.32),
     Moeda(
-        icone: 'images/usdcoin.png',
-        nome: 'USD Coin',
-        sigla: 'USDC',
-        preco: 5.02,
+      icone: 'images/usdcoin.png',
+      nome: 'USD Coin',
+      sigla: 'USDC',
+      preco: 5.02,
     ),
-    Moeda(
-      icone: 'images/litecoin.png',
-      nome: 'Litecoin',
-      sigla: 'LTC',
-      preco: 669.93,
-    )
+    Moeda(icone: 'images/xrp.png', nome: 'XRP', sigla: 'XRP', preco: 3.34),
   ];
 }
