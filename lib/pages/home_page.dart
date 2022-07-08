@@ -1,17 +1,14 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, unnecessary_import, implementation_imports
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:graficos_integracao/pages/favoritas_page.dart';
 import 'package:graficos_integracao/pages/moedas_page.dart';
 
-import 'favoritas_page.dart';
+import 'configuracoes_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -38,21 +35,28 @@ class _HomePageState extends State<HomePage> {
         children: [
           MoedasPage(),
           FavoritasPage(),
+          ConfiguracoesPage(),
         ],
         onPageChanged: setPaginaAtual,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: paginaAtual,
-        // ignore: prefer_const_literals_to_create_immutables
+        type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Todas'),
           BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favoritas'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_balance_wallet), label: 'Carteira'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Conta'),
         ],
         onTap: (pagina) {
-          pc.animateToPage(pagina,
-              duration: Duration(milliseconds: 400), curve: Curves.ease);
+          pc.animateToPage(
+            pagina,
+            duration: Duration(milliseconds: 400),
+            curve: Curves.ease,
+          );
         },
-        backgroundColor: Colors.grey[200],
+        // backgroundColor: Colors.grey[100],
       ),
     );
   }

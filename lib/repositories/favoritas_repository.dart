@@ -1,9 +1,10 @@
-// ignore_for_file: prefer_final_fields, unused_field, avoid_function_literals_in_foreach_calls
+// ignore_for_file: prefer_final_fields, unused_field, avoid_function_literals_in_foreach_calls, depend_on_referenced_packages
 
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:graficos_integracao/adapters/moeda_hive_adapter.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:graficos_integracao/models/moeda.dart';
 
